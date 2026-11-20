@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SupersAPPturated</title>
+<!-- favicon: a square-lattice crystal with a kink, where the next atom (orange) is built in -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2304316a'/%3E%3Cg fill='%238fc1e3'%3E%3Crect x='4' y='19' width='7' height='7' rx='1.2'/%3E%3Crect x='12' y='19' width='7' height='7' rx='1.2'/%3E%3Crect x='20' y='19' width='7' height='7' rx='1.2'/%3E%3Crect x='4' y='11' width='7' height='7' rx='1.2'/%3E%3Crect x='12' y='11' width='7' height='7' rx='1.2'/%3E%3Crect x='4' y='3' width='7' height='7' rx='1.2'/%3E%3C/g%3E%3Ccircle cx='23.5' cy='14.5' r='3.6' fill='%23ff9a5c'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#04316a">
 <meta name="description" content="Interactive nucleation and growth simulation for the lecture Introduction to Interface Engineering (FAU Erlangen-Nürnberg).">
 <style>
 :root{
@@ -322,13 +325,13 @@ body.proj .chip .v{font-size:1.3rem}
         In einem atomistischen Modell (Molekulardynamik oder Monte Carlo eines Gittergases) liefern dieselben Regeln sowohl Keimbildung als auch spinodale Entmischung, und die Spinodale ist ein allmählicher Übergang statt einer scharfen Linie: Scharf ist sie nur in der Mean-Field-Theorie, und das ist G(X) hier.</p>
         <p><b>Vereinfachungen.</b> Längen sind in Pixeln, Zeiten in simulierten Sekunden. Partikel sind Kugeln (keine Facetten, siehe die Folien zur Wulff-Konstruktion), und sie aggregieren nicht.</p>
       </details>
-    <p class="credits"><span lang="en" class="l-en">SupersAPPturated v2.20 (WS 2026-27). Concept and original Nucleation Game (SS 2025): Prof. Robin N. Klupp Taylor, FAU. Rebuilt with Claude.</span><span lang="de" class="l-de">SupersAPPturated v2.20 (WS 2026-27). Konzept und ursprüngliches Nucleation Game (SS 2025): Prof. Robin N. Klupp Taylor, FAU. Neu umgesetzt mit Claude.</span></p>
+    <p class="credits"><span lang="en" class="l-en">SupersAPPturated v2.21 (WS 2026-27). Concept and original Nucleation Game (SS 2025): Prof. Robin N. Klupp Taylor, FAU. Rebuilt with Claude.</span><span lang="de" class="l-de">SupersAPPturated v2.21 (WS 2026-27). Konzept und ursprüngliches Nucleation Game (SS 2025): Prof. Robin N. Klupp Taylor, FAU. Neu umgesetzt mit Claude.</span></p>
   </div>
 </div>
 <div class="tray" id="tray-settings" aria-hidden="true">
   <div class="trayhead"><h2>Settings</h2><button class="trayclose" aria-label="Close">×</button></div>
   <div class="traybody"><div id="controls"></div><div class="trayactions" id="trayActions"></div>
-    <p class="appcredit" id="appCredit"><span lang="en" class="l-en">SupersAPPturated v2.20 · Concept: Prof. Robin N. Klupp Taylor, FAU Erlangen-Nürnberg · Developed with Claude</span><span lang="de" class="l-de">SupersAPPturated v2.20 · Konzept: Prof. Robin N. Klupp Taylor, FAU Erlangen-Nürnberg · Entwickelt mit Claude</span></p></div>
+    <p class="appcredit" id="appCredit"><span lang="en" class="l-en">SupersAPPturated v2.21 · Concept: Prof. Robin N. Klupp Taylor, FAU Erlangen-Nürnberg · Developed with Claude</span><span lang="de" class="l-de">SupersAPPturated v2.21 · Konzept: Prof. Robin N. Klupp Taylor, FAU Erlangen-Nürnberg · Entwickelt mit Claude</span></p></div>
 </div>
 <div class="tray" id="tray-results" aria-hidden="true">
   <div class="trayhead"><h2>Results</h2><button class="trayclose" aria-label="Close">×</button></div>
@@ -380,11 +383,11 @@ const DE = {
   'Growth mechanism': 'Wachstumsmechanismus', 'Which step is slow: transport to the particle, or building into its surface (and how).': 'Welcher Schritt langsam ist: der Transport zum Partikel oder der Einbau in seine Oberfläche (und wie).',
   'Integration rate constant k_r': 'Einbau-Geschwindigkeitskonstante k_r', 'How fast the surface builds molecules in. Small: reaction limited. Large: the integration step is fast and diffusion takes over (mixed control).': 'Wie schnell die Oberfläche Moleküle einbaut. Klein: reaktionskontrolliert. Groß: Der Einbau ist schnell, und die Diffusion übernimmt (gemischte Kontrolle).',
   'Growth rate vs supersaturation': 'Wachstum gegen Übersättigung', 'Growth rate vs particle size': 'Wachstum gegen Partikelgröße', 'Mean size and width': 'Mittlere Größe und Breite',
-  'Supersaturation σ = S − 1': 'Übersättigung σ = S − 1', 'Particle size x (px)': 'Partikelgröße x (px)',
+  'Relative supersaturation σ = S − 1': 'Relative Übersättigung σ = S − 1', 'Particle size x (px)': 'Partikelgröße x (px)',
   'each run adds a point at 20 s': 'jeder Lauf setzt bei 20 s einen Punkt', 'growth rates appear after a few seconds': 'Wachstumsgeschwindigkeiten erscheinen nach einigen Sekunden',
   'slope = exponent g in G ∝ σ^{g}': 'Steigung = Exponent g in G ∝ σ^{g}', 'log₁₀ σ   (σ = S − 1)': 'log₁₀ σ   (σ = S − 1)', 'log₁₀ (G in px/s)': 'log₁₀ (G in px/s)', 'axes:': 'Achsen:', 'linear': 'linear', 'log-log': 'log-log',
   'particles': 'Partikel', 'constant': 'konstant', 'σ = S − 1': 'σ = S − 1', 'Mechanism': 'Mechanismus', 'Mean growth rate G': 'Mittlere Wachstumsgeschwindigkeit G',
-  'Measured points so far': 'Bisher gemessene Punkte', 'Supersaturation σ = S − 1 ': 'Übersättigung σ = S − 1',
+  'Measured points so far': 'Bisher gemessene Punkte', 'Relative supersaturation σ = S − 1 ': 'Relative Übersättigung σ = S − 1',
   'Each run adds one point at 20 s: the mean growth rate of the seeds, measured from 8 to 20 s at the constant S of that run. Dashed: G ∝ σ (diffusion, rough surface), G ∝ σ·(σ/σ₁)·tanh(σ₁/σ) (BCF) or G ∝ σ·exp(−B/σ) (birth and spread), scaled through the points. Open circle: this run so far. Pills hide a mechanism; reload the page to clear the points.': 'Jeder Lauf setzt bei 20 s einen Punkt: die mittlere Wachstumsgeschwindigkeit der Impfkristalle, gemessen von 8 bis 20 s beim konstanten S dieses Laufs. Gestrichelt: G ∝ σ (Diffusion, raue Oberfläche), G ∝ σ·(σ/σ₁)·tanh(σ₁/σ) (BCF) oder G ∝ σ·exp(−B/σ) (Birth and Spread), durch die Punkte skaliert. Offener Kreis: dieser Lauf bisher. Die Schalter blenden einen Mechanismus aus; Neuladen der Seite löscht die Punkte.',
   'One dot per seed: its growth rate dx/dt over the last 12 s. Dashed: best fit G ∝ 1/x (diffusion limited, dx/dt = 4D·v_M·Δc/x). Dotted: a constant G (reaction limited).': 'Ein Punkt pro Impfkristall: seine Wachstumsgeschwindigkeit dx/dt über die letzten 12 s. Gestrichelt: beste Anpassung G ∝ 1/x (diffusionskontrolliert, dx/dt = 4D·v_M·Δc/x). Gepunktet: ein konstantes G (reaktionskontrolliert).',
   'Dashed: arithmetic mean size x_{1,0}. Shaded: from x₁₀,₀ to x₉₀,₀. Diffusion limited: the band narrows (focusing). Reaction limited: it keeps its width.': 'Gestrichelt: arithmetische mittlere Größe x_{1,0}. Schattiert: von x₁₀,₀ bis x₉₀,₀. Diffusionskontrolliert: Das Band wird schmaler (Fokussierung). Reaktionskontrolliert: Es behält seine Breite.',
@@ -956,7 +959,8 @@ const SIG1 = 2, B_BS = 1.5, KD = 1, KR = 1;   // BCF crossover σ₁, birth-and-
 LEVELS[7] = {
   title: 'Level 5: Crystal growth: supersaturation, kinetics and shape',
   concept: `<p>The solute now crystallises into a <b>square lattice</b>. Each crystal atom is bound to its neighbours, so a site where an arriving atom gets <b>two bonds</b> (a kink, at a step) holds it much better than a site with <b>one bond</b> (on a flat edge, the 2D "terrace"). Free atoms random-walk; next to the crystal they are built in, and crystal atoms leave again, faster the fewer bonds they have. Colours show the bonds of each crystal atom.</p>
-    <p><b>Low supersaturation:</b> an atom that lands on a flat edge usually leaves again before a second one arrives next to it. Only kink sites keep atoms, rows are completed one by one and the crystal grows slowly with <b>straight edges (facets)</b>: growth is limited by the <b>integration</b> step (a new row must "nucleate" on the edge, birth and spread in 2D). <b>High supersaturation:</b> atoms arrive so often that they stick wherever they first touch. Now the <b>supply by diffusion</b> limits growth; corners and tips reach further into the solution, catch more solute and grow faster still, so the crystal becomes <b>rough and then dendritic</b>. If S is high enough, new <b>nuclei</b> also form in the solution (compact squares of n* + 1 atoms).</p>`,
+    <p><b>Low supersaturation:</b> an atom that lands on a flat edge usually leaves again before a second one arrives next to it. Only kink sites keep atoms, rows are completed one by one and the crystal grows slowly with <b>straight edges (facets)</b>: growth is limited by the <b>integration</b> step (a new row must "nucleate" on the edge, birth and spread in 2D). <b>High supersaturation:</b> atoms arrive so often that they stick wherever they first touch. Now the <b>supply by diffusion</b> limits growth; corners and tips reach further into the solution, catch more solute and grow faster still, so the crystal becomes <b>rough and then dendritic</b>. If S is high enough, new <b>nuclei</b> also form in the solution (compact squares of n* + 1 atoms).</p>
+    <p><b>S and σ.</b> The supersaturation <b>S = c/c<sub>eq</sub></b> is the concentration divided by the solubility, as in the other tabs (S = 1: saturated). Growth rates are usually plotted against the <b>relative supersaturation σ = S − 1 = (c − c<sub>eq</sub>)/c<sub>eq</sub></b>, the excess over saturation, so σ = 0 at saturation. For small σ, σ ≈ ln S = Δμ/kT, the driving force for growth.</p>`,
   tryThis: [
     'Run the four presets. Describe the shape in each case and look at the colours: which bond numbers dominate at the surface (chart "Surface atoms by bonds")?',
     'Low S preset: watch one edge. How does a new row start, and how is it completed? Why is the "step" (kink) site so important?',
@@ -983,7 +987,8 @@ LEVELS[7] = {
 DE_LEVELS[7] = {
   title: 'Level 5: Kristallwachstum: Übersättigung, Kinetik und Form',
   concept: `<p>Der gelöste Stoff kristallisiert jetzt in ein <b>quadratisches Gitter</b>. Jedes Kristallatom ist an seine Nachbarn gebunden, daher hält ein Platz, an dem ein ankommendes Atom <b>zwei Bindungen</b> bekommt (eine Kinke, an einer Stufe), es viel besser als ein Platz mit <b>einer Bindung</b> (auf einer glatten Kante, der 2D-„Terrasse“). Freie Atome laufen zufällig umher; neben dem Kristall werden sie eingebaut, und Kristallatome lösen sich wieder, umso schneller, je weniger Bindungen sie haben. Die Farben zeigen die Bindungen jedes Kristallatoms.</p>
-    <p><b>Kleine Übersättigung:</b> Ein Atom, das auf einer glatten Kante landet, löst sich meist wieder, bevor ein zweites daneben ankommt. Nur Kinkenplätze halten Atome, Reihen werden eine nach der anderen vervollständigt, und der Kristall wächst langsam mit <b>geraden Kanten (Facetten)</b>: Das Wachstum ist durch den <b>Einbau</b> begrenzt (eine neue Reihe muss auf der Kante „keimen“, Birth and Spread in 2D). <b>Große Übersättigung:</b> Atome kommen so oft an, dass sie dort haften, wo sie zuerst berühren. Jetzt begrenzt die <b>Nachlieferung durch Diffusion</b> das Wachstum; Ecken und Spitzen ragen weiter in die Lösung, fangen mehr gelösten Stoff ein und wachsen noch schneller, der Kristall wird <b>rau und dann dendritisch</b>. Ist S groß genug, bilden sich auch neue <b>Keime</b> in der Lösung (kompakte Quadrate aus n* + 1 Atomen).</p>`,
+    <p><b>Kleine Übersättigung:</b> Ein Atom, das auf einer glatten Kante landet, löst sich meist wieder, bevor ein zweites daneben ankommt. Nur Kinkenplätze halten Atome, Reihen werden eine nach der anderen vervollständigt, und der Kristall wächst langsam mit <b>geraden Kanten (Facetten)</b>: Das Wachstum ist durch den <b>Einbau</b> begrenzt (eine neue Reihe muss auf der Kante „keimen“, Birth and Spread in 2D). <b>Große Übersättigung:</b> Atome kommen so oft an, dass sie dort haften, wo sie zuerst berühren. Jetzt begrenzt die <b>Nachlieferung durch Diffusion</b> das Wachstum; Ecken und Spitzen ragen weiter in die Lösung, fangen mehr gelösten Stoff ein und wachsen noch schneller, der Kristall wird <b>rau und dann dendritisch</b>. Ist S groß genug, bilden sich auch neue <b>Keime</b> in der Lösung (kompakte Quadrate aus n* + 1 Atomen).</p>
+    <p><b>S und σ.</b> Die Übersättigung <b>S = c/c<sub>eq</sub></b> ist die Konzentration geteilt durch die Löslichkeit, wie in den anderen Tabs (S = 1: gesättigt). Wachstumsgeschwindigkeiten werden meist gegen die <b>relative Übersättigung σ = S − 1 = (c − c<sub>eq</sub>)/c<sub>eq</sub></b> aufgetragen, den Überschuss über die Sättigung, also σ = 0 bei Sättigung. Für kleine σ gilt σ ≈ ln S = Δμ/kT, die treibende Kraft für das Wachstum.</p>`,
   tryThis: [
     'Lassen Sie die vier Voreinstellungen laufen. Beschreiben Sie jeweils die Form und sehen Sie sich die Farben an: Welche Bindungszahlen überwiegen an der Oberfläche (Diagramm „Oberflächenatome nach Bindungen“)?',
     'Voreinstellung „Kleines S“: Beobachten Sie eine Kante. Wie beginnt eine neue Reihe, und wie wird sie vervollständigt? Warum ist der Stufenplatz (die Kinke) so wichtig?',
@@ -2508,7 +2513,7 @@ function chartLatSigma(canvas) {
     fr = chartFrame(canvas, [L10(0.1), L10(smax)], [lo, hi], { xl: 'log₁₀ σ   (σ = S − 1)', yl: 'log₁₀ (G in px/s)' });
   } else {
     const gmax = Math.max(0.5, ...latPts.map(p => p.G), isFinite(live) ? live : 0) * 1.2;
-    fr = chartFrame(canvas, [0, smax], [0, gmax], { xl: 'Supersaturation σ = S − 1', yl: 'G (px/s)' });
+    fr = chartFrame(canvas, [0, smax], [0, gmax], { xl: 'Relative supersaturation σ = S − 1', yl: 'G (px/s)' });
   }
   const c = fr.c, X = v => fr.X(lg ? L10(v) : v), Y = v => fr.Y(lg ? L10(Math.max(v, 1e-6)) : v);
   // colour: shape at the end of the run (navy = compact square, vermilion = dendritic)
@@ -2587,7 +2592,7 @@ function chartKinSigma(canvas) {
     fr.gmin = gminL; fr.gmax = gmaxL;
   } else {
     const gmax = Math.max(0.05, ...shown.map(p => p.G), live) * 1.2;
-    fr = chartFrame(canvas, [0, smax], [0, gmax], { xl: 'Supersaturation σ = S − 1', yl: 'G = dx/dt (px/s)' });
+    fr = chartFrame(canvas, [0, smax], [0, gmax], { xl: 'Relative supersaturation σ = S − 1', yl: 'G = dx/dt (px/s)' });
     fr.gmin = 0; fr.gmax = gmax;
   }
   const c = fr.c, px = v => lg ? L10(v) : v, ok = v => lg ? v > 0 : true;
@@ -3300,7 +3305,7 @@ function results() {
     $('results').innerHTML = '<h3 class="ct">Results</h3><table>' + rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('') + '</table>';
     return;
   }
-  const rows = LEVELS[level].kin ? [['Growth mechanism', T(MECH[P.mech].name)], ['Supersaturation σ = S − 1', (Snow() - 1).toFixed(2)],
+  const rows = LEVELS[level].kin ? [['Growth mechanism', T(MECH[P.mech].name)], ['Relative supersaturation σ = S − 1', (Snow() - 1).toFixed(2)],
     ['Mean growth rate G', isFinite(kinNow) ? kinNow.toFixed(3) + ' px/s' : '–'], ['Measured points so far', kinPts.length]] : [['Nucleation events', nNucleated]];
   if (LEVELS[level].growth) {
     if (!LEVELS[level].kin) rows.push(['Nuclei that redissolved', nRedissolved]);
