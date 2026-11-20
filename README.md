@@ -7,6 +7,8 @@ SupersAPPturated is a browser app for teaching how a new phase forms from a supe
 | `main` | https://supers-app-turated.ipt-apps.workers.dev/ |
 | `dev` | https://dev-supers-app-turated.ipt-apps.workers.dev/ |
 
+The old address, supers-app-turated.netlify.app, forwards to the `main` address.
+
 ![SupersAPPturated's phase-diagram tab](docs/screenshot.jpg)
 
 ## Build and check
