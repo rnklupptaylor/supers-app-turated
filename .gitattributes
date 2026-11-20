@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+
+# Keep the deployed bytes unchanged.
+src/index.html -text

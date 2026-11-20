@@ -1,0 +1,13 @@
+{
+  "name": "supers-app-turated",
+  "version": "2.20.0",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node tools/build.cjs",
+    "test": "node tests/validate.cjs"
+  }
+}
